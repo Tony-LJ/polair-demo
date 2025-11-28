@@ -9,13 +9,11 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 export default defineConfig({
-
   define: {
     'process.env': {}
   },
 
   plugins: [vue()],
-
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
@@ -24,7 +22,6 @@ export default defineConfig({
   },
 
   base: './',
-
   server: {
     host: 'localhost', // 服务启动地址 默认： '127.0.0.1'
     port: 3000, // 服务启动端口 默认值： 3000
@@ -48,6 +45,5 @@ export default defineConfig({
 
   css: { preprocessorOptions: { css: { charset: false } } },
   build: {
-
   },
 })
