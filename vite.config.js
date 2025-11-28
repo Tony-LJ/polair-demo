@@ -9,17 +9,22 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 export default defineConfig({
+
   define: {
     'process.env': {}
   },
+
   plugins: [vue()],
+
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   },
+
   base: './',
+
   server: {
     host: 'localhost', // 服务启动地址 默认： '127.0.0.1'
     port: 3000, // 服务启动端口 默认值： 3000
@@ -32,7 +37,7 @@ export default defineConfig({
         ws: false,  // webStock 请求
         rewrite: (path) => path.replace(/^\/api/, '') // 处理替换的函数 api是替换的关键字
       },
-      '/han': {  // 这是第二个代理地址，和上面的是一样的
+      '/polar': {  // 这是第二个代理地址，和上面的是一样的
         target: 'https://api.vvhan.com/api/',
         changeOrigin: true, // 是否允许跨域
         ws: false,
@@ -40,6 +45,7 @@ export default defineConfig({
       }
     }
   },
+
   css: { preprocessorOptions: { css: { charset: false } } },
   build: {
 
