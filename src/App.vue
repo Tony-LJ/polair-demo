@@ -6,7 +6,6 @@
   <header>
 
   </header>
-
   <main>
 
   </main>
