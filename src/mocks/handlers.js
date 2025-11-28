@@ -1,4 +1,7 @@
-
+/**
+ * @descr: 模拟请求数据
+ * @author: Tony
+ * */
 import { rest } from 'msw';
 
 export const handlers = [
