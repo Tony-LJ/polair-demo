@@ -73,6 +73,11 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
 将Prettier添加到EsLint中
 修改`.eslintrc.ts`文件，在extends中增加
+'prettier',
+'plugin:prettier/recommended'
+其中：
+- `prettier/@typescript-eslint`：使得@typescript-eslint中的样式规范失效，遵循prettier中的样式规范
+- `plugin:prettier/recommended`：使用prettier中的样式规范，且如果使得ESLint会检测prettier的格式问题，同样将格式问题以error的形式抛出
 
 ```
 
