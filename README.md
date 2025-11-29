@@ -111,7 +111,7 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 - [Tailwincss](https://tailwindcss.com/)
 - [Pinia](https://pinia.vuejs.org/)
 - [TypeScript](https://typescript.p2hp.com/)
-
+- [Vue3-常用格式化脚本](https://blog.csdn.net/Bruce__taotao/article/details/153781283)
 
 
 
