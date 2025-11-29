@@ -16,7 +16,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
+      '@': resolve(__dirname, './src'), // 设置 `@` 指向 `src` 目录
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   },
@@ -46,4 +46,5 @@ export default defineConfig({
   css: { preprocessorOptions: { css: { charset: false } } },
   build: {
   },
+
 })
