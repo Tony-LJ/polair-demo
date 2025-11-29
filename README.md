@@ -71,6 +71,9 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 - `eslint-plugin-prettier`：将prettier作为ESLint规范来使用
 手动创建文件：.prettierrc.ts
 
+将Prettier添加到EsLint中
+修改`.eslintrc.ts`文件，在extends中增加
+
 ```
 
 
