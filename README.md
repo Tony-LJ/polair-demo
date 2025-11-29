@@ -103,6 +103,45 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 ```
 
 
+## 学习总结
+### 基于Axois的Http Request公共请求工具封装
+- [request.ts]()
+```.text
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 参考资料
 - [Vue3](https://cn.vuejs.org/guide/introduction)
 - [VueUse中文网](https://vueuse.nodejs.cn/)

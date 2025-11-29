@@ -1,5 +1,5 @@
 <script setup>
-
+  import login from './view/login/login.vue'
 </script>
 
 <template>
@@ -8,6 +8,7 @@
 
   <main>
     <h1> Polaris-Core </h1>
+    <login></login>
   </main>
 </template>
 
