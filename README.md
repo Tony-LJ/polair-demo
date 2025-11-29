@@ -46,6 +46,13 @@ polair-demo/
 
 ```
 
+## js改成ts
+```.text
+npm install --save-dev typescript @vue/runtime-dom
+
+```
+
+
 ## 代码格式化
 ```.text
 （1）EsLint 提供编码规范；
