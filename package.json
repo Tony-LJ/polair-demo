@@ -40,5 +40,22 @@
     "vite": "^7.2.4",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vitest": "^4.0.14"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src*/**/*.ts": [
+      "prettier --config .prettierrc.js --write",
+      "eslint",
+      "git add"
+    ],
+    "src*/**/*.json": [
+      "prettier --config .prettierrc.js --write",
+      "eslint",
+      "git add"
+    ]
   }
 }
