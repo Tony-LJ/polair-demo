@@ -46,6 +46,25 @@ polair-demo/
 
 ```
 
+## 代码格式化
+```.text
+（1）EsLint 提供编码规范；
+（2）Prettier 是一个 Opinionated 的代码格式化工具。
+
+1.原理：
+安装：eslint
+npm i -D eslint eslint-plugin-vue @typescript-eslint/parser @typescript-eslint/eslint-plugin
+这四个依赖分别是：
+- `eslint`: EsLint的核心代码
+- `eslint-plugin-vue`：[为Vue使用Eslint的插件](https://eslint.vuejs.org/)
+- `@typescript-eslint/parser`：ESLint的解析器，用于解析typescript，从而检查和规范Typescript代码
+- `@typescript-eslint/eslint-plugin`：这是一个ESLint插件，包含了各类定义好的检测Typescript代码的规范 
+
+生成配置文件:.eslint.cjs
+npx eslint --init
+```
+
+
 
 
 
