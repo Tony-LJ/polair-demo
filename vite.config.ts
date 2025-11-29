@@ -43,7 +43,7 @@ export default defineConfig({
     }
   },
 
-  css: { preprocessorOptions: { css: { charset: false } } },
+  // css: { preprocessorOptions: { css: { charset: false } } },
   build: {
   },
 
