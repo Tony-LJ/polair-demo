@@ -105,11 +105,38 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
 ## 学习总结
 ### 基于Axois的Http Request公共请求工具封装
-- [request.ts]()
+- [index.ts]()
 ```.text
 
 
 ```
+
+### 基于pinia的状态管理器
+- [index.ts]()
+```.text
+
+
+```
+
+### 基于Vue-Router路由管理器
+- [index.ts]()
+```.text
+
+
+```
+
+### Flex布局以及
+```.text
+
+
+```
+
+### CSS Flex布局
+```.text
+
+
+```
+
 
 
 

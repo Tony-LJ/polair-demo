@@ -1,4 +1,6 @@
+
 import axios from './login'
+
 namespace Login {
     // 用户登录表单
     export interface LoginReqForm {
@@ -10,6 +12,7 @@ namespace Login {
         token: string;
     }
 }
+
 // 用户登录
 export const login = (params: Login.LoginReqForm) => {
     // 返回的数据格式可以和服务端约定
