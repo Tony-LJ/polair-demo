@@ -111,7 +111,7 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
 ```
 
-### 基于pinia的状态管理器
+### 基于Pinia的状态管理器
 - [index.ts]()
 ```.text
 
@@ -137,6 +137,24 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
 ```
 
+### Vue3组件化开发
+```.text
+
+
+```
+
+
+### Vue3组件通信
+```.text
+
+
+```
+
+### Mock模拟数据
+```.text
+
+
+```
 
 
 
@@ -145,12 +163,11 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
 
 
+## TypeScript语法
+```.text
 
 
-
-
-
-
+```
 
 
 
@@ -178,7 +195,7 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 - [Pinia](https://pinia.vuejs.org/)
 - [TypeScript](https://typescript.p2hp.com/)
 - [Vue3-常用格式化脚本](https://blog.csdn.net/Bruce__taotao/article/details/153781283)
-
+- [TypeScript基本语法](https://blog.csdn.net/qq_44713454/article/details/122548379)
 
 
 
