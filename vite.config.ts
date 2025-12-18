@@ -1,5 +1,6 @@
 /**
- * @descr Vue3项目配置，特别是代理设置至关重要
+ * @descr Vite 构建工具的核心配置文件（TypeScript 版本），用于自定义 Vite 的构建、开发、代理、插件等所有行为，替代了传统 Vue CLI 的 vue.config.js。
+ *       它是前端项目（尤其是 Vue/React+TS）中控制 Vite 打包、开发服务器、依赖解析的关键文件
  * @author: Tony
  * @date: 2025-11-18
  * */
