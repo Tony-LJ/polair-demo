@@ -4,16 +4,24 @@
  * @date: 2025-11-18
  * */
 
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { viteMockServe } from 'vite-plugin-mock'
 
 export default defineConfig({
   define: {
     'process.env': {}
   },
 
-  plugins: [vue()],
+  plugins: [
+      vue(),
+      viteMockServe({
+        mockPath: 'mock', // mock文件目录
+        enable: true, // 开启mock
+        supportTs: true // 支持TS
+      })
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'), // 设置 `@` 指向 `src` 目录

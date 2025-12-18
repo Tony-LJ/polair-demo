@@ -147,6 +147,37 @@ npm i --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 ### Vue3组件通信
 ```.text
 
+```
+- [props父组件向子组件通信]()
+```.text
+
+```
+- [自定义事件,子组件向父组件进行通信]()
+```.text
+
+```
+- [全局事件总线]()
+```.text
+
+```
+- [v-model组件通信(父子组件数据同步)]()
+```.text
+
+```
+- [useAttrs组件通信]()
+```.text
+
+```
+- [ref与$parent]()
+```.text
+
+```
+- [provide-inject可以实现隔辈传输]()
+```.text
+
+```
+- [Pinia]()
+```.text
 
 ```
 
