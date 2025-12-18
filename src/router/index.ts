@@ -6,15 +6,37 @@
 
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '@/views/Home.vue'
+import Login from '@/views/login/Login.vue'
+import {ref} from "vue";
+
+// 模拟登录状态
+export const isLogin = ref(false)
 
 // 路由规则定义
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
+        redirect: '/login'
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
+    {
+        path: '/home',
         name: 'Home',
         component: Home,
         meta: {
             title: '首页 - Mock数据演示'
+        },
+        // 路由守卫：未登录禁止访问首页
+        beforeEnter: (to, from, next) => {
+            if (isLogin.value) {
+                next()
+            } else {
+                next('/login')
+            }
         }
     },
     {

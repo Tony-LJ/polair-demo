@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 宇宙背景自定义样式 */
+@layer utilities {
+    .star-bg {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23000020"/><circle cx="50" cy="50" r="1" fill="white" opacity="0.8"/></svg>');
+        background-size: 50px 50px;
+    }
+    .nebula-gradient {
+        background: radial-gradient(circle at 30% 40%, rgba(80, 120, 200, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(150, 80, 200, 0.15) 0%, transparent 70%);
+    }
+}
+
+/* 全局样式重置 */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
