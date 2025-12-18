@@ -20,7 +20,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/user',
         name: 'User',
-        component: () => import('@/views/User.vue'),
+        component: () => import('@/views/user/User.vue'),
         meta: {
             title: '用户管理 - Mock数据演示'
         },
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
             {
                 path: 'detail/:id',
                 name: 'UserDetail',
-                component: () => import('@/views/UserDetail.vue'),
+                component: () => import('@/views/user/UserDetail.vue'),
                 meta: {
                     title: '用户详情 - Mock数据演示'
                 },

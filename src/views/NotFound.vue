@@ -1,3 +1,8 @@
+<!--
+@descr: 系统404页面
+@author: Tony
+@date: 2025-12-07
+-->
 <template>
   <div class="not-found">
     <h1>404</h1>

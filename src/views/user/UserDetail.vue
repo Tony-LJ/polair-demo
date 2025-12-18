@@ -1,11 +1,10 @@
 <!--
-@descr: web系统首页
+@descr: 用户详情页面
 @author: Tony
 @date: 2025-12-07
 -->
-
 <template>
-  <div class="home">
+  <div class="userDetail">
   </div>
 </template>
 
