@@ -1,3 +1,9 @@
+/**
+ * @descr: 基于pinia实现用户状态管理
+ * @author: Tony
+ * @date: 2025-12-07
+ * */
+
 import { defineStore } from 'pinia'
 import { getUserList, getUserDetail, UserInfo } from '@/api/user'
 
