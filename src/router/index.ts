@@ -1,3 +1,9 @@
+/**
+ * @descr: 前端路由管理器
+ * @author: Tony
+ * @date: 2025-12-07
+ * */
+
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '@/views/Home.vue'
 
