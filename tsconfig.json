@@ -22,12 +22,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/vite-env.d.ts" // 确保声明文件被包含
-  ],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"], // 包含所有TS/Vue文件,
   "exclude": ["node_modules", "dist"]
 }

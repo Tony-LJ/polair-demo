@@ -28,13 +28,10 @@
     "@types/mockjs": "^1.0.10",
     "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "^6.0.3",
+    "@vitejs/plugin-vue-jsx": "^5.1.2",
     "@vue/compiler-sfc": "^3.5.25",
     "@vue/runtime-dom": "^3.5.25",
     "autoprefixer": "^10.4.23",
-    "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-vue": "^10.6.2",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
@@ -64,5 +61,8 @@
       "eslint",
       "git add"
     ]
+  },
+  "overrides": {
+    "vite": "^7.2.4"
   }
 }
