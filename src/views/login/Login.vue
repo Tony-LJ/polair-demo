@@ -48,7 +48,7 @@ const handleAccountLogin = async () => {
     const res = await post<{
       token: string
       userInfo: { id: string; username: string }
-    }>('/api/login/account', {
+    }>('/mock/login/account', {
       username: accountForm.value.username,
       password: accountForm.value.password,
       remember: accountForm.value.remember
@@ -80,7 +80,7 @@ const handleThirdPartyLogin = async (type: 'wechat' | 'qq' | 'github') => {
     const res = await post<{
       token: string
       userInfo: { id: string; username: string }
-    }>('/api/login/thirdparty', { type })
+    }>('/mock/login/thirdparty', { type })
 
     // 存储登录态
     localStorage.setItem('token', res.token)
