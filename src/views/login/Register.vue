@@ -1,5 +1,5 @@
 <!--
-@descr: 北极星账号注册页
+@descr: 北极星账号注册页（适配小米样式+宇宙背景）
 @author: Tony
 @date: 2025-12-07
 -->
@@ -25,6 +25,12 @@ const loading = ref(false)          // 注册按钮加载状态
 const sendCodeLoading = ref(false)  // 发送验证码加载状态
 const codeCountdown = ref(0)        // 验证码倒计时
 let countdownTimer: NodeJS.Timeout | null = null  // 倒计时定时器
+
+// 临时空方法（用于占位，后续可扩展下拉选择逻辑）
+const openCountrySelect = () => {
+  // 暂未实现，可在此处添加国家/地区下拉选择逻辑
+  alert('国家/地区选择功能暂未实现，当前默认选择：中国(+86)')
+}
 
 // 表单验证
 const validateForm = (): boolean => {
@@ -140,7 +146,7 @@ onUnmounted(() => {
 
       <!-- 国家/地区选择 -->
       <div class="form-item country-select">
-        <div class="select-wrapper" @click="/* 可扩展下拉选择逻辑 */">
+        <div class="select-wrapper" @click="openCountrySelect">
           <span>{{ registerForm.country }}</span>
           <span class="arrow-icon">▼</span>
         </div>
