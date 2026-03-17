@@ -2,7 +2,6 @@
  * axios 封装：请求拦截、响应拦截、错误处理、请求取消、基础配置等
  * 适配 Vue3 + TS + Vite 环境变量
  */
-
 // src/utils/request.ts
 import axios, {
     AxiosInstance,
@@ -12,19 +11,31 @@ import axios, {
     InternalAxiosRequestConfig
 } from 'axios'
 
-// 创建Axios实例
+// 从环境变量读取配置
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
+
+// 创建 Axios 实例
 const service: AxiosInstance = axios.create({
-    baseURL: '', // Mock场景留空，避免路径拼接问题
-    timeout: 5000,
-    headers: { 'Content-Type': 'application/json;charset=utf-8' }
+    baseURL: API_BASE_URL, // 接口前缀（Mock/真实接口统一）
+    timeout: 10000, // 请求超时
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+    }
 })
 
-// 请求拦截器
+// 请求拦截器：添加 token、处理请求前逻辑
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-        // 模拟token添加（Mock场景不影响）
+        // 从本地存储获取 token（登录后存储）
         const token = localStorage.getItem('token') || sessionStorage.getItem('token')
-        if (token) config.headers.Authorization = `Bearer ${token}`
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
+        // Mock 模式下打印请求信息（方便调试）
+        if (USE_MOCK) {
+            console.log(`【Mock 请求】${config.method?.toUpperCase()} ${config.url}`, config.data)
+        }
         return config
     },
     (error: AxiosError) => {
@@ -33,41 +44,42 @@ service.interceptors.request.use(
     }
 )
 
-// 核心：修复后的响应拦截器（极致容错+精准提示）
+// 响应拦截器：统一处理响应、错误
 service.interceptors.response.use(
     (response: AxiosResponse) => {
         const res = response.data
-        // 调试：打印返回数据，方便排查
-        console.log('【Mock接口返回数据】', res)
-
-        // 兜底：如果没有code字段，手动构造成功数据（避免拦截器崩溃）
-        if (typeof res !== 'object' || res.code === undefined) {
-            console.warn('【Mock接口格式异常】', res)
-            return { code: 200, message: '登录成功', token: 'MOCK_TOKEN_123', userInfo: { id: '1', username: 'admin' } }
+        // Mock 模式下打印响应信息
+        if (USE_MOCK) {
+            console.log(`【Mock 响应】${response.config.url}`, res)
         }
 
-        // 正常业务逻辑
+        // 统一响应格式：code=200 为成功
         if (res.code !== 200) {
-            alert(`登录失败：${res.message || '用户名/密码错误'}`)
+            // 错误提示
+            alert(res.message || '操作失败')
+            // 登录失效（code=401）：清除 token 并跳回登录页
             if (res.code === 401) {
-                localStorage.clear()
+                localStorage.removeItem('token')
+                sessionStorage.removeItem('token')
                 window.location.href = '/login'
             }
             return Promise.reject(res)
         }
+
+        // 成功：返回响应数据（业务层直接用 res.data）
         return res
     },
     (error: AxiosError) => {
-        // 分场景精准提示
+        // 统一错误提示
         const errMsg = {
-            'ERR_BAD_RESPONSE': '❌ Mock接口响应异常（检查mock/login.ts）',
-            'ERR_NETWORK': '❌ 网络异常（检查Mock插件是否启动）',
-            'ERR_BAD_REQUEST': '❌ 请求路径错误（确认是/mock/login/xxx）',
-            'ECONNREFUSED': '❌ 请求被转发到8089端口（注释proxy配置）'
+            'ERR_BAD_RESPONSE': USE_MOCK ? '❌ Mock 接口响应异常' : '❌ 后端接口响应异常',
+            'ERR_NETWORK': '❌ 网络异常，请检查连接',
+            'ERR_TIMEOUT': '❌ 请求超时，请稍后重试',
+            'ECONNREFUSED': '❌ 后端服务未启动，请检查服务地址'
         }[error.code || ''] || `❌ 请求失败：${error.message}`
 
         alert(errMsg)
-        console.error('【响应拦截器错误详情】', {
+        console.error('【响应拦截器错误】', {
             url: error.config?.url,
             code: error.code,
             status: error.response?.status,
@@ -77,12 +89,34 @@ service.interceptors.response.use(
     }
 )
 
-// 封装请求方法
-export const post = <T>(url: string, data: any = {}, config?: AxiosRequestConfig): Promise<T> => {
+// 封装通用请求方法（业务层调用）
+/**
+ * POST 请求
+ * @param url 接口路径（如 /login/account）
+ * @param data 请求参数
+ * @param config 额外配置
+ */
+export const post = <T>(
+    url: string,
+    data: Record<string, any> = {},
+    config: AxiosRequestConfig = {}
+): Promise<T> => {
     return service.post(url, data, config)
 }
-export const get = <T>(url: string, params: any = {}, config?: AxiosRequestConfig): Promise<T> => {
+
+/**
+ * GET 请求
+ * @param url 接口路径
+ * @param params 请求参数
+ * @param config 额外配置
+ */
+export const get = <T>(
+    url: string,
+    params: Record<string, any> = {},
+    config: AxiosRequestConfig = {}
+): Promise<T> => {
     return service.get(url, { params, ...config })
 }
 
+// 导出 Axios 实例（特殊场景使用）
 export default service

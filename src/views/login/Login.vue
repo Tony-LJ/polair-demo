@@ -1,5 +1,5 @@
 <!--
-@descr: 用户登录页
+@descr: 用户登录页（适配小米账号样式）
 @author: Tony
 @date: 2025-12-07
 -->
@@ -13,9 +13,9 @@ const router = useRouter()
 
 // 表单数据
 const accountForm = ref({
-  username: 'admin',
-  password: '123456',
-  remember: true // 记住我默认勾选
+  username: '',
+  password: '',
+  agree: false // 同意协议
 })
 
 // 密码显示/隐藏
@@ -23,16 +23,20 @@ const showPassword = ref(false)
 // 登录加载状态
 const loading = ref(false)
 // 第三方登录加载状态
-const thirdPartyLoading = ref('') // 存储当前加载的第三方类型：wechat/qq/github
+const thirdPartyLoading = ref('') // 存储当前加载的第三方类型：alipay/wechat/qq/weibo
 
 // 表单验证
 const validateAccountForm = (): boolean => {
   if (!accountForm.value.username.trim()) {
-    alert('请输入用户名')
+    alert('请输入邮箱/手机号码/小米ID')
     return false
   }
   if (!accountForm.value.password.trim()) {
     alert('请输入密码')
+    return false
+  }
+  if (!accountForm.value.agree) {
+    alert('请阅读并同意小米账号使用协议和隐私政策')
     return false
   }
   return true
@@ -44,56 +48,51 @@ const handleAccountLogin = async () => {
 
   loading.value = true
   try {
-    // 调用 Mock 登录接口（注意：路径前加 /api，和 Mock 配置一致）
+    // 调用 Mock 登录接口
     const res = await post<{
       token: string
       userInfo: { id: string; username: string }
-    }>('/mock/login/account', {
+    }>('/api/login/account', {
       username: accountForm.value.username,
-      password: accountForm.value.password,
-      remember: accountForm.value.remember
+      password: accountForm.value.password
     })
 
     // 存储登录态
-    if (accountForm.value.remember) {
-      localStorage.setItem('token', res.token)
-      localStorage.setItem('savedUsername', accountForm.value.username)
-    } else {
-      sessionStorage.setItem('token', res.token)
-    }
-
-    // 跳转到首页
+    localStorage.setItem('token', res.token)
     router.push('/home')
   } catch (error) {
     console.error('登录失败：', error)
-    alert((error as any).msg || '登录失败，请检查账号密码（模拟账号：admin/123456）')
+    alert((error as any).msg || '登录失败，请检查账号密码')
   } finally {
     loading.value = false
   }
 }
 
 // 第三方登录
-const handleThirdPartyLogin = async (type: 'wechat' | 'qq' | 'github') => {
+const handleThirdPartyLogin = async (type: 'alipay' | 'wechat' | 'qq' | 'weibo') => {
   thirdPartyLoading.value = type
   try {
-    // 调用第三方登录 Mock 接口
     const res = await post<{
       token: string
       userInfo: { id: string; username: string }
-    }>('/mock/login/thirdparty', { type })
-
-    // 存储登录态
+    }>('/api/login/thirdparty', { type })
     localStorage.setItem('token', res.token)
     router.push('/home')
   } catch (error) {
     console.error(`${type}登录失败：`, error)
-    alert(`${type === 'wechat' ? '微信' : type === 'qq' ? 'QQ' : 'GitHub'}登录失败`)
+    const typeName = {
+      alipay: '支付宝',
+      wechat: '微信',
+      qq: 'QQ',
+      weibo: '微博'
+    }[type]
+    alert(`${typeName}登录失败`)
   } finally {
     thirdPartyLoading.value = ''
   }
 }
 
-// 页面挂载时读取记住的账号
+// 页面挂载时读取记住的账号（可选保留）
 onMounted(() => {
   const savedUsername = localStorage.getItem('savedUsername')
   if (savedUsername) {
@@ -105,106 +104,109 @@ onMounted(() => {
 <template>
   <div class="login-container">
     <div class="login-card">
-      <h1 class="login-title">欢迎回来</h1>
-      <p class="login-subtitle">登录后继续你的检索增强对话。</p>
+      <!-- 顶部标签栏 -->
+      <div class="tab-bar">
+        <div class="tab-item active">登录</div>
+        <div class="tab-item">注册</div>
+      </div>
 
       <!-- 用户名输入框 -->
-      <div class="form-item">
-        <label class="form-label">用户名</label>
-        <div class="input-wrapper">
-          <span class="input-icon">👤</span>
-          <input
-              v-model="accountForm.username"
-              type="text"
-              placeholder="请输入用户名"
-              class="form-input"
-              :disabled="loading"
-          />
-        </div>
+      <div class="input-item">
+        <input
+            v-model="accountForm.username"
+            type="text"
+            placeholder="邮箱/手机号码/WeChatID"
+            class="form-input"
+            :disabled="loading"
+        />
       </div>
 
       <!-- 密码输入框 -->
-      <div class="form-item">
-        <label class="form-label">密码</label>
-        <div class="input-wrapper">
-          <span class="input-icon">🔒</span>
-          <input
-              v-model="accountForm.password"
-              :type="showPassword ? 'text' : 'password'"
-              placeholder="请输入密码"
-              class="form-input"
-              :disabled="loading"
-          />
-          <span
-              class="password-toggle"
-              @click="showPassword = !showPassword"
-              :disabled="loading"
-          >
-            {{ showPassword ? '🙈' : '👁️' }}
-          </span>
-        </div>
+      <div class="input-item">
+        <input
+            v-model="accountForm.password"
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="密码"
+            class="form-input"
+            :disabled="loading"
+        />
+        <span
+            class="password-toggle"
+            @click="showPassword = !showPassword"
+            :disabled="loading"
+        >
+          {{ showPassword ? '👁️' : '🙈' }}
+        </span>
       </div>
 
-      <!-- 记住我 & 提示文字 -->
-      <div class="form-actions">
-        <label class="remember-checkbox">
-          <input
-              type="checkbox"
-              v-model="accountForm.remember"
-              :disabled="loading"
-          />
-          <span class="checkmark"></span>
-          记住我
-        </label>
-        <span class="helper-text">账号由管理员初始化</span>
+      <!-- 同意协议 -->
+      <div class="agree-item">
+        <input
+            type="checkbox"
+            v-model="accountForm.agree"
+            :disabled="loading"
+            id="agree"
+        />
+        <label for="agree">已阅读并同意</label>
+        <a href="#" class="link">小米账号使用协议</a>
+        <span>和</span>
+        <a href="#" class="link">小米账号隐私政策</a>
       </div>
 
       <!-- 登录按钮 -->
       <button
           class="login-btn"
           @click="handleAccountLogin"
-          :disabled="loading"
+          :disabled="loading || !accountForm.agree"
       >
         <span v-if="loading">登录中...</span>
         <span v-else>登录</span>
       </button>
 
+      <!-- 辅助链接 -->
+      <div class="link-group">
+        <a href="#" class="link forgot">忘记密码?</a>
+        <a href="#" class="link phone">手机号登录</a>
+      </div>
+
       <!-- 分割线 -->
       <div class="divider">
-        <span>其他登录方式</span>
+        <span>其他方式登录</span>
       </div>
 
       <!-- 第三方登录按钮 -->
       <div class="third-party-login">
         <button
+            class="third-party-btn alipay"
+            @click="handleThirdPartyLogin('alipay')"
+            :disabled="thirdPartyLoading === 'alipay'"
+        >
+          <span v-if="thirdPartyLoading === 'alipay'">加载中...</span>
+          <span v-else>支</span>
+        </button>
+        <button
             class="third-party-btn wechat"
             @click="handleThirdPartyLogin('wechat')"
             :disabled="thirdPartyLoading === 'wechat'"
         >
-          <span v-if="thirdPartyLoading === 'wechat'">微信登录中...</span>
-          <span v-else>
-            📱 微信登录
-          </span>
+          <span v-if="thirdPartyLoading === 'wechat'">加载中...</span>
+          <span v-else>💬</span>
         </button>
         <button
             class="third-party-btn qq"
             @click="handleThirdPartyLogin('qq')"
             :disabled="thirdPartyLoading === 'qq'"
         >
-          <span v-if="thirdPartyLoading === 'qq'">QQ登录中...</span>
-          <span v-else>
-            🐧 QQ登录
-          </span>
+          <span v-if="thirdPartyLoading === 'qq'">加载中...</span>
+          <span v-else>🐧</span>
         </button>
         <button
-            class="third-party-btn github"
-            @click="handleThirdPartyLogin('github')"
-            :disabled="thirdPartyLoading === 'github'"
+            class="third-party-btn weibo"
+            @click="handleThirdPartyLogin('weibo')"
+            :disabled="thirdPartyLoading === 'weibo'"
         >
-          <span v-if="thirdPartyLoading === 'github'">GitHub登录中...</span>
-          <span v-else>
-            🐙 GitHub登录
-          </span>
+          <span v-if="thirdPartyLoading === 'weibo'">加载中...</span>
+          <span v-else>📡</span>
         </button>
       </div>
     </div>
@@ -218,7 +220,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f7fa;
+  background-color: #fff;
   padding: 20px;
 }
 
@@ -227,163 +229,126 @@ onMounted(() => {
   width: 100%;
   max-width: 450px;
   background: #ffffff;
-  border-radius: 16px;
   padding: 40px 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* 标题样式 */
-.login-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #1d2129;
-  margin: 0 0 8px 0;
-}
-
-.login-subtitle {
-  font-size: 14px;
-  color: #86909c;
-  margin: 0 0 32px 0;
-}
-
-/* 表单项 */
-.form-item {
-  margin-bottom: 24px;
-}
-
-.form-label {
-  display: block;
-  font-size: 14px;
-  color: #1d2129;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.input-wrapper {
-  position: relative;
+/* 顶部标签栏 */
+.tab-bar {
   display: flex;
-  align-items: center;
+  margin-bottom: 32px;
+}
+.tab-item {
+  font-size: 24px;
+  font-weight: 500;
+  color: #999;
+  margin-right: 32px;
+  padding-bottom: 8px;
+  cursor: pointer;
+}
+.tab-item.active {
+  color: #333;
+  border-bottom: 2px solid #ff6700; /* 小米橙色 */
 }
 
-.input-icon {
-  position: absolute;
-  left: 12px;
-  font-size: 16px;
-  color: #86909c;
-  z-index: 1;
+/* 输入框 */
+.input-item {
+  position: relative;
+  margin-bottom: 16px;
 }
-
 .form-input {
   width: 100%;
-  height: 44px;
-  padding: 0 12px 0 40px;
-  border: 1px solid #dcdfe6;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #1d2129;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  color: #333;
   outline: none;
-  transition: border-color 0.2s;
   box-sizing: border-box;
 }
-
-.form-input:focus {
-  border-color: #4c6fff;
+.form-input::placeholder {
+  color: #999;
 }
-
+.form-input:focus {
+  border-color: #ff6700;
+}
 .form-input:disabled {
-  background-color: #f5f7fa;
+  background-color: #f5f5f5;
   cursor: not-allowed;
 }
 
 /* 密码切换按钮 */
 .password-toggle {
   position: absolute;
-  right: 12px;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 16px;
   cursor: pointer;
-  color: #86909c;
+  color: #999;
   user-select: none;
 }
-
 .password-toggle:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-/* 记住我 & 辅助文字 */
-.form-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.remember-checkbox {
+/* 同意协议 */
+.agree-item {
   display: flex;
   align-items: center;
+  margin-bottom: 24px;
   font-size: 14px;
-  color: #1d2129;
-  cursor: pointer;
-  user-select: none;
+  color: #666;
 }
-
-.remember-checkbox input {
-  display: none;
-}
-
-.checkmark {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
+.agree-item input {
   margin-right: 8px;
-  position: relative;
-  transition: background-color 0.2s, border-color 0.2s;
+  transform: scale(1.2);
 }
-
-.remember-checkbox input:checked + .checkmark {
-  background-color: #4c6fff;
-  border-color: #4c6fff;
-}
-
-.remember-checkbox input:checked + .checkmark::after {
-  content: '✓';
-  position: absolute;
-  color: white;
-  font-size: 12px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.helper-text {
-  font-size: 12px;
-  color: #86909c;
+.link {
+  color: #ff6700;
+  text-decoration: none;
+  margin: 0 4px;
 }
 
 /* 登录按钮 */
 .login-btn {
   width: 100%;
   height: 48px;
-  background-color: #4c6fff;
+  background-color: #ffb88c;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 4px;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
   margin-bottom: 24px;
 }
-
 .login-btn:hover {
-  background-color: #3a5ef0;
+  background-color: #ff9a5a;
+}
+.login-btn:disabled {
+  background-color: #ffd2b3;
+  cursor: not-allowed;
 }
 
-.login-btn:disabled {
-  background-color: #859cff;
-  cursor: not-allowed;
+/* 辅助链接 */
+.link-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.link.forgot {
+  color: #ff6700;
+  text-decoration: none;
+  font-size: 14px;
+}
+.link.phone {
+  color: #ff6700;
+  text-decoration: none;
+  font-size: 14px;
 }
 
 /* 分割线 */
@@ -391,18 +356,16 @@ onMounted(() => {
   display: flex;
   align-items: center;
   margin: 24px 0;
-  color: #86909c;
-  font-size: 12px;
+  color: #999;
+  font-size: 14px;
 }
-
 .divider::before,
 .divider::after {
   content: '';
   flex: 1;
   height: 1px;
-  background-color: #dcdfe6;
+  background-color: #eee;
 }
-
 .divider span {
   padding: 0 16px;
 }
@@ -410,48 +373,37 @@ onMounted(() => {
 /* 第三方登录按钮 */
 .third-party-login {
   display: flex;
-  gap: 12px;
+  gap: 24px;
   justify-content: center;
 }
-
 .third-party-btn {
-  flex: 1;
-  height: 40px;
-  border: 1px solid #dcdfe6;
-  border-radius: 8px;
-  background-color: #fff;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
   cursor: pointer;
   transition: all 0.2s;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+.third-party-btn.alipay {
+  background-color: #1677ff;
+}
 .third-party-btn.wechat {
-  color: #07c160;
-  border-color: #07c160;
+  background-color: #07c160;
 }
-
-.third-party-btn.wechat:hover {
-  background-color: #f0f9f2;
-}
-
 .third-party-btn.qq {
-  color: #12b7f5;
-  border-color: #12b7f5;
+  background-color: #12b7f5;
 }
-
-.third-party-btn.qq:hover {
-  background-color: #e8f7fc;
+.third-party-btn.weibo {
+  background-color: #e6162d;
 }
-
-.third-party-btn.github {
-  color: #333;
-  border-color: #333;
+.third-party-btn:hover {
+  opacity: 0.9;
 }
-
-.third-party-btn.github:hover {
-  background-color: #f5f5f5;
-}
-
 .third-party-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;

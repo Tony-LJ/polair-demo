@@ -25,11 +25,24 @@ export default defineConfig({
     port: 3000,
     open: true,
     // 完全注释代理！避免转发冲突
-    // proxy: { '/api': { target: 'http://127.0.0.1:8089', changeOrigin: true } }
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8089',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '') // 去掉前缀 /api，后端接收 /login/account
+      }
+    }
   },
   // 关键：关闭开发环境压缩
   esbuild: {
     minify: false, // 关闭代码压缩
     minifyIdentifiers: false, // 关闭变量名混淆
   },
+  // proxy: {
+  //   '/api': {
+  //     target: 'http://127.0.0.1:8089',
+  //     changeOrigin: true,
+  //     rewrite: (path) => path.replace(/^\/api/, '') // 去掉前缀 /api，后端接收 /login/account
+  //   }
+  // }
 })

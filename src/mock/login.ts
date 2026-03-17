@@ -20,7 +20,7 @@ const mockUser = {
 export default [
     // 账号密码登录：路径改为 /mock/login/account
     {
-        url: '/mock/login/account',
+        url: '/api/login/account',
         method: 'post',
         response: ({ body }) => {
             const { username, password } = body
@@ -43,7 +43,7 @@ export default [
     },
     // 第三方登录：路径改为 /mock/login/thirdparty
     {
-        url: '/mock/login/thirdparty',
+        url: '/api/login/thirdparty',
         method: 'post',
         response: ({ body }) => {
             const { type } = body
