@@ -1,18 +1,15 @@
-<!--
-@descr: 北极星账号登录/注册一体化页面（宇宙星际特效版）
-@author: Tony
-@date: 2025-12-07
--->
+<!-- src/views/login/Login.vue -->
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { post } from '@/utils/request'
+// 导入 Register 组件，用于 Tab 切换渲染
 import Register from '@/views/login/Register.vue'
 
 // 路由实例
 const router = useRouter()
 
-// 页面状态：login / register（控制Tab切换）
+// 页面状态：login / register（控制 Tab 切换）
 const activeTab = ref<'login' | 'register'>('login')
 
 // 登录表单数据
@@ -22,22 +19,9 @@ const loginForm = ref({
   agree: false
 })
 
-// 注册表单数据（完全还原小米注册页字段）
-const registerForm = ref({
-  country: '中国',
-  countryCode: '+86',
-  phone: '',
-  code: '',
-  agree: false
-})
-
 // 通用状态管理
 const showPassword = ref(false)
 const loginLoading = ref(false)        // 登录按钮加载状态
-const registerLoading = ref(false)     // 注册按钮加载状态
-const sendCodeLoading = ref(false)     // 发送验证码加载状态
-const codeCountdown = ref(0)           // 验证码倒计时
-let countdownTimer: NodeJS.Timeout | null = null  // 倒计时定时器
 
 // ====================== 登录相关逻辑 ======================
 // 登录表单验证
@@ -63,16 +47,11 @@ const handleLogin = async () => {
 
   loginLoading.value = true
   try {
-    // 调用登录接口
-    const res = await post<{ token: string; userInfo: { id: string; username: string } }>(
-        '/api/login/account',
-        {
-          username: loginForm.value.username,
-          password: loginForm.value.password
-        }
-    )
+    const res = await post<{ token: string }>('/api/login/account', {
+      username: loginForm.value.username,
+      password: loginForm.value.password
+    })
 
-    // 存储token并跳转首页
     localStorage.setItem('token', res.token)
     router.push('/home')
   } catch (error) {
@@ -83,118 +62,12 @@ const handleLogin = async () => {
   }
 }
 
-// ====================== 注册相关逻辑 ======================
-// 注册表单验证
-const validateRegisterForm = (): boolean => {
-  // 手机号验证
-  if (!registerForm.value.phone.trim()) {
-    alert('请输入手机号')
-    return false
-  }
-  if (!/^1[3-9]\d{9}$/.test(registerForm.value.phone)) {
-    alert('请输入有效的中国大陆手机号')
-    return false
-  }
-
-  // 验证码验证
-  if (!registerForm.value.code.trim()) {
-    alert('请输入验证码')
-    return false
-  }
-
-  // 协议勾选验证
-  if (!registerForm.value.agree) {
-    alert('请阅读并同意北极星账号使用协议和隐私政策')
-    return false
-  }
-
-  return true
-}
-
-// 发送验证码
-const sendVerificationCode = async () => {
-  // 手机号格式校验
-  if (!/^1[3-9]\d{9}$/.test(registerForm.value.phone)) {
-    alert('请输入有效的中国大陆手机号')
-    return
-  }
-
-  // 倒计时中不重复发送
-  if (codeCountdown.value > 0) return
-
-  sendCodeLoading.value = true
-  try {
-    // 调用发送验证码接口
-    await post('/api/send-code', {
-      countryCode: registerForm.value.countryCode,
-      phone: registerForm.value.phone
-    })
-
-    alert('验证码已发送，请注意查收')
-
-    // 启动60秒倒计时
-    codeCountdown.value = 60
-    countdownTimer = setInterval(() => {
-      codeCountdown.value--
-      if (codeCountdown.value <= 0) {
-        clearInterval(countdownTimer!)
-        countdownTimer = null
-      }
-    }, 1000)
-  } catch (error) {
-    console.error('发送验证码失败：', error)
-    alert((error as any).msg || '验证码发送失败，请稍后重试')
-  } finally {
-    sendCodeLoading.value = false
-  }
-}
-
-// 处理注册提交
-const handleRegister = async () => {
-  if (!validateRegisterForm()) return
-
-  registerLoading.value = true
-  try {
-    // 调用注册接口
-    await post('/api/register', {
-      countryCode: registerForm.value.countryCode,
-      phone: registerForm.value.phone,
-      code: registerForm.value.code
-    })
-
-    // 注册成功 - 提示并切回登录Tab
-    alert('注册成功！请使用手机号登录')
-    activeTab.value = 'login'
-    // 清空注册表单
-    registerForm.value = {
-      country: '中国',
-      countryCode: '+86',
-      phone: '',
-      code: '',
-      agree: false
-    }
-    codeCountdown.value = 0
-  } catch (error) {
-    console.error('注册失败：', error)
-    alert((error as any).msg || '注册失败，请检查信息后重试')
-  } finally {
-    registerLoading.value = false
-  }
-}
-
 // ====================== 生命周期 ======================
 // 页面挂载时读取记住的账号
 onMounted(() => {
   const savedUsername = localStorage.getItem('savedUsername')
   if (savedUsername) {
     loginForm.value.username = savedUsername
-  }
-})
-
-// 页面卸载时清除定时器
-onUnmounted(() => {
-  if (countdownTimer) {
-    clearInterval(countdownTimer)
   }
 })
 </script>
@@ -309,82 +182,9 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <!-- ========== 注册表单区域（还原小米样式） ========== -->
+      <!-- ========== 注册表单区域（直接渲染 Register 组件） ========== -->
       <div class="form-content" v-if="activeTab === 'register'">
-        <!-- 国家/地区选择 -->
-        <div class="form-item country-select">
-          <div class="select-wrapper">
-            <span>{{ registerForm.country }}</span>
-            <span class="arrow-icon">▼</span>
-          </div>
-        </div>
-
-        <!-- 手机号输入行（国家码+手机号） -->
-        <div class="form-item phone-row">
-          <div class="country-code">
-            <span>{{ registerForm.countryCode }}</span>
-          </div>
-          <input
-              v-model="registerForm.phone"
-              type="tel"
-              placeholder="请输入手机号"
-              class="phone-input"
-              :disabled="registerLoading || sendCodeLoading"
-              maxlength="11"
-          />
-        </div>
-
-        <!-- 验证码输入行 -->
-        <div class="form-item code-row">
-          <input
-              v-model="registerForm.code"
-              type="text"
-              placeholder="请输入验证码"
-              class="code-input"
-              :disabled="registerLoading"
-              maxlength="6"
-          />
-          <button
-              class="get-code-btn"
-              @click="sendVerificationCode"
-              :disabled="sendCodeLoading || codeCountdown > 0 || registerLoading"
-          >
-            <span v-if="sendCodeLoading">发送中...</span>
-            <span v-else-if="codeCountdown > 0">{{ codeCountdown }}秒后重新发送</span>
-            <span v-else>获取验证码</span>
-          </button>
-        </div>
-
-        <!-- 协议勾选 -->
-        <div class="form-item agree-item">
-          <input
-              type="checkbox"
-              v-model="registerForm.agree"
-              :disabled="registerLoading"
-              id="register-agree"
-          />
-          <label for="register-agree">
-            已阅读并同意
-            <a href="#" class="link">北极星账号使用协议</a>
-            和
-            <a href="#" class="link">北极星账号隐私政策</a>
-          </label>
-        </div>
-
-        <!-- 注册按钮 -->
-        <button
-            class="action-btn register-btn"
-            @click="handleRegister"
-            :disabled="registerLoading || !registerForm.agree"
-        >
-          <span v-if="registerLoading">注册中...</span>
-          <span v-else>注册</span>
-        </button>
-
-        <!-- 辅助链接：收不到验证码？ -->
-        <div class="helper-link">
-          <a href="#" class="code-help">收不到验证码?</a>
-        </div>
+        <Register />
       </div>
     </div>
   </div>
@@ -548,17 +348,6 @@ onUnmounted(() => {
   background-color: #ffd2b3;
   cursor: not-allowed;
 }
-.register-btn {
-  background-color: #ff6700;
-  margin-bottom: 16px;
-}
-.register-btn:hover {
-  background-color: #ff9a5a;
-}
-.register-btn:disabled {
-  background-color: #ffb88c;
-  cursor: not-allowed;
-}
 
 /* 辅助链接组（忘记密码 & 手机号登录） */
 .link-group {
@@ -626,111 +415,6 @@ onUnmounted(() => {
   opacity: 0.9;
 }
 
-/* 注册表单 - 国家/地区选择 */
-.country-select .select-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-  color: #333;
-  padding: 8px 16px;
-  border: 1px solid #f0f0f0;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  margin-bottom: 16px;
-  cursor: pointer;
-}
-.arrow-icon {
-  font-size: 12px;
-  color: #999;
-}
-
-/* 注册表单 - 手机号行 */
-.phone-row {
-  display: flex;
-  align-items: center;
-  border: 1px solid #f0f0f0;
-  border-radius: 4px;
-  overflow: hidden;
-  background-color: #f9f9f9;
-  margin-bottom: 16px;
-}
-.country-code {
-  padding: 0 16px;
-  font-size: 16px;
-  color: #333;
-  border-right: 1px solid #f0f0f0;
-  height: 48px;
-  display: flex;
-  align-items: center;
-}
-.phone-input {
-  flex: 1;
-  height: 48px;
-  padding: 0 16px;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #333;
-  background: transparent;
-}
-.phone-input::placeholder {
-  color: #999;
-}
-
-/* 注册表单 - 验证码行 */
-.code-row {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-.code-input {
-  flex: 1;
-  height: 48px;
-  padding: 0 16px;
-  border: 1px solid #f0f0f0;
-  border-radius: 4px;
-  outline: none;
-  font-size: 16px;
-  color: #333;
-  background-color: #f9f9f9;
-}
-.code-input::placeholder {
-  color: #999;
-}
-.get-code-btn {
-  width: 140px;
-  height: 48px;
-  background-color: #ff6700;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.get-code-btn:hover {
-  background-color: #ff9a5a;
-}
-.get-code-btn:disabled {
-  background-color: #ffb88c;
-  cursor: not-allowed;
-}
-
-/* 辅助链接（收不到验证码？） */
-.helper-link {
-  text-align: center;
-  margin-top: 16px;
-}
-.code-help {
-  font-size: 14px;
-  color: #ff6700;
-  text-decoration: none;
-}
-.code-help:hover {
-  text-decoration: underline;
-}
-
 /* 响应式适配 */
 @media (max-width: 480px) {
   .login-card {
@@ -741,10 +425,6 @@ onUnmounted(() => {
   }
   .tab-item {
     font-size: 20px;
-  }
-  .get-code-btn {
-    width: 120px;
-    font-size: 12px;
   }
   .third-party-login {
     gap: 16px;
