@@ -3,12 +3,6 @@
   <div class="home-container">
     <!-- 顶部导航栏 -->
     <header class="home-header">
-<!--      <div class="header-left">
-        <div class="home-logo">
-          <span class="home-logo-ai">AI</span>
-          <span class="home-logo-b">B</span>
-        </div>
-      </div>-->
       <nav class="home-header-nav">
         <a href="#" class="home-nav-item">
           <span class="nav-icon">🏠</span>
@@ -50,6 +44,7 @@
             <a href="#" class="dropdown-item">数据平台</a>
             <a href="#" class="dropdown-item">业务咨询</a>
             <a href="#" class="dropdown-item">数据信息</a>
+            <a href="#" class="dropdown-item">IT兼职</a>
             <a href="#" class="dropdown-item">信息中介</a>
             <a href="#" class="dropdown-item">个人电商</a>
             <a href="#" class="dropdown-item">个人媒体</a>
@@ -65,7 +60,7 @@
             <a href="#" class="dropdown-item">个人简历</a>
             <a href="#" class="dropdown-item">个人随笔</a>
             <a href="#" class="dropdown-item">时光记录</a>
-            <a href="#" class="dropdown-item">相册</a>
+            <a href="#" class="dropdown-item">相册空间</a>
           </div>
         </div>
         <a href="#" class="home-nav-item">
