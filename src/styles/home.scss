@@ -19,6 +19,17 @@ $opacity-base: 0.7;
   min-width: 100%;
   min-height: 100%;
   background: $bg-color;
+  /* 🔥 自适应核心属性 */
+  background-image: var(--bg-image); // 配合Vue动态绑定
+  background-size: cover; // 覆盖整个容器，自动拉伸/裁剪保持比例
+  background-position: center center; // 始终居中显示（关键：裁剪时保留中间核心区域）
+  background-repeat: no-repeat; // 禁止重复
+  background-attachment: fixed; // 固定背景，滚动时不移动
+  /* 兼容低版本浏览器 */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+
   color: $text-color;
   font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   box-sizing: border-box;
@@ -272,7 +283,7 @@ $opacity-base: 0.7;
     font-weight: 100;
     margin: 0;
     letter-spacing: 2px;
-    color: #000000; // 白色时钟（适配深色背景）
+    color: #ffffff; // 白色时钟（适配深色背景）
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); // 文字阴影，提升可读性
   }
 
@@ -283,7 +294,7 @@ $opacity-base: 0.7;
     display: flex;
     justify-content: center;
     gap: 18px;
-    color: #000000; // 白色日期
+    color: #ffffff; // 白色日期
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   }
 }

@@ -1,7 +1,7 @@
 <!-- src/views/Home.vue -->
 <template>
-  <div class="home-container">
-    <!-- 顶部导航栏 -->
+  <div class="home-container" :style="{ backgroundImage: `url(${currentBackgroundImage})` }">
+    <!-- 导航栏、时钟、搜索框等结构保持不变 -->
     <header class="home-header">
       <nav class="home-header-nav">
         <a href="#" class="home-nav-item">
@@ -85,7 +85,6 @@
           <span>{{ currentDate }}</span>
         </div>
 
-        <!-- 🔥 新增搜索框 -->
         <div class="search-box">
           <span class="search-icon-left">🐾</span>
           <input
@@ -101,8 +100,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+// 🔥 改用网络图片（无需本地文件，直接测试功能）
+import bg1 from '@/assets/imgs/fOGZBxWPj.jpeg'
+// import bg2 from '@/assets/imgs/24635678570797.png'
+const backgroundImages = ref([
+  // 替换为你自己的网络图片 URL
+  // 'https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/5a9b98911cd647bd85146bf72aa92757.png~tplv-a9rns2rl98-image.png',
+  bg1
+])
+const currentBackgroundIndex = ref(0)
+const currentBackgroundImage = computed(() => {
+  return backgroundImages.value[currentBackgroundIndex.value]
+})
 
+// 其余代码（时钟、切换逻辑）保持不变
 const currentTime = ref('')
 const amPm = ref('AM')
 const currentDate = ref('')
@@ -122,21 +134,27 @@ const formatDateTime = () => {
   currentDate.value = `${month}月${day}日 ${week}`
 }
 
+const switchBackgroundImage = () => {
+  currentBackgroundIndex.value = (currentBackgroundIndex.value + 1) % backgroundImages.value.length
+}
+
 let timer: number
+let backgroundTimer: number
 onMounted(() => {
   formatDateTime()
   timer = window.setInterval(formatDateTime, 60000)
+  backgroundTimer = window.setInterval(switchBackgroundImage, 5000)
 })
 
 onUnmounted(() => {
   clearInterval(timer)
+  clearInterval(backgroundTimer)
 })
 </script>
 
 <style scoped>
 @import '@/styles/home.scss';
 
-/* 重置默认边距，确保全屏无空白 */
 * {
   margin: 0;
   padding: 0;
