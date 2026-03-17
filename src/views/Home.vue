@@ -42,16 +42,27 @@
       </div>
     </header>
 
-    <!-- 核心内容：时钟 -->
+    <!-- 主内容区：时钟 + 搜索框 -->
     <main class="home-main-content">
-      <div class="home-clock-section">
+      <section class="home-hero-section">
         <h1 class="home-time">{{ currentTime }}</h1>
         <div class="home-date-info">
           <span>{{ amPm }}</span>
           <span>丙午年 正月廿九</span>
           <span>{{ currentDate }}</span>
         </div>
-      </div>
+
+        <!-- 🔥 新增搜索框 -->
+        <div class="search-box">
+          <span class="search-icon-left">🐾</span>
+          <input
+              type="text"
+              placeholder="搜点什么吧"
+              class="search-input"
+          />
+          <span class="search-icon-right">🔍</span>
+        </div>
+      </section>
     </main>
   </div>
 </template>
