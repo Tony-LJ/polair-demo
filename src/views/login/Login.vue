@@ -1,6 +1,6 @@
 <!-- src/views/login/Login.vue -->
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted ,computed} from 'vue'
 import { useRouter } from 'vue-router'
 import { post } from '@/utils/request'
 // 导入Register组件
@@ -25,6 +25,27 @@ const loginForm = ref({
 // 状态管理
 const showPassword = ref(false)
 const loginLoading = ref(false)
+
+// 🔥 改用网络图片（无需本地文件，直接测试功能）
+import bg1 from '@/assets/imgs/fOGZBxWPj.jpeg'
+// import bg2 from '@/assets/imgs/24635678570797.png'
+const backgroundImages = ref([
+  // 替换为你自己的网络图片 URL
+  // 'https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/5a9b98911cd647bd85146bf72aa92757.png~tplv-a9rns2rl98-image.png',
+  bg1
+])
+// 当前背景图索引
+const currentBgIndex = ref(0)
+// 计算当前背景图URL
+const currentBgImage = computed(() => {
+  return backgroundImages.value[currentBgIndex.value]
+})
+
+// 🔥 2. 背景图定时切换函数
+let bgTimer: number
+const switchBgImage = () => {
+  currentBgIndex.value = (currentBgIndex.value + 1) % backgroundImages.value.length
+}
 
 // 登录表单验证
 const validateLoginForm = (): boolean => {
@@ -81,7 +102,11 @@ onMounted(() => {
 <template>
   <div class="login-container">
     <!-- 宇宙星际背景 -->
-    <div class="cosmic-bg"></div>
+    <!-- 🔥 替换原有背景：添加自适应背景图容器 -->
+    <div
+        class="login-bg"
+        :style="{ backgroundImage: `url(${currentBgImage})` }"
+    ></div>
 
     <!-- 登录/注册卡片（使用公共样式类） -->
     <div class="login-register-card">

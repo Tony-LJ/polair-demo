@@ -7,21 +7,55 @@ $bg-gray: #f9f9f9;       // 输入框背景灰
 $text-gray: #999;        // 文本浅灰
 $border-gray: #f0f0f0;   // 边框灰
 
-// 卡片容器
-.login-register-card {
-  width: 100%;
-  max-width: 450px;
-  background: #ffffff;
-  padding: 40px 32px;
-  border-radius: 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
-
-  // 响应式适配
-  @media (max-width: 480px) {
-    padding: 32px 24px;
-    max-width: 100%;
+/* 🔥 登录页背景容器 - 自适应核心样式 */
+.login-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;   /* 占满视口宽度 */
+  height: 100vh;  /* 占满视口高度 */
+  z-index: -1;
+  /* 自适应关键属性 */
+  background-size: cover;       /* 等比缩放，覆盖整个容器，多余部分裁剪 */
+  background-position: center;  /* 始终居中显示，保证核心区域可见（和你截图一致） */
+  background-repeat: no-repeat; /* 禁止平铺 */
+  background-attachment: fixed; /* 背景固定，不随页面滚动 */
+  /* 平滑过渡动画 */
+  transition: background-image 0.8s ease-in-out;
+  /* 半透明遮罩，提升表单可读性 */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* 调暗背景，让登录框更突出 */
   }
+}
+
+/* 登录容器 - 确保占满视口 */
+.login-container {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 登录卡片 - 保证在背景上方且居中 */
+.login-register-card {
+  position: relative;
+  z-index: 10;
+  max-width: 420px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 32px 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 // Tab切换栏（仅登录页使用）
