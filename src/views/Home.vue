@@ -24,13 +24,35 @@
         </div>
 
         <!-- 专题研究（带下拉） -->
-        <div class="nav-dropdown">
+<!--        <div class="nav-dropdown">
           <div class="home-nav-item dropdown-trigger">
             <span class="nav-icon">🔥</span>
             <span class="nav-text">专题研究</span>
           </div>
           <div class="dropdown-menu">
             <a href="#" class="dropdown-item">科技研究</a>
+            <a href="#" class="dropdown-item">经济金融</a>
+            <a href="#" class="dropdown-item">身心健康</a>
+            <a href="#" class="dropdown-item">学术研究</a>
+          </div>
+        </div>-->
+        <!-- 专题研究（带下拉） -->
+        <div class="nav-dropdown">
+          <div class="home-nav-item dropdown-trigger">
+            <span class="nav-icon">🔥</span>
+            <span class="nav-text">专题研究</span>
+          </div>
+          <div class="dropdown-menu">
+            <!-- 科技研究（去掉箭头 →） -->
+            <div class="nav-dropdown dropdown-item-with-sub">
+              <a href="#" class="dropdown-item">科技研究</a> <!-- 这里去掉了 → -->
+              <div class="dropdown-submenu">
+                <a href="#" class="dropdown-subitem">人工智能</a>
+                <a href="#" class="dropdown-subitem">大数据</a>
+                <a href="#" class="dropdown-subitem">云计算</a>
+                <a href="#" class="dropdown-subitem">区块链</a>
+              </div>
+            </div>
             <a href="#" class="dropdown-item">经济金融</a>
             <a href="#" class="dropdown-item">身心健康</a>
             <a href="#" class="dropdown-item">学术研究</a>
@@ -103,10 +125,11 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 // 🔥 改用网络图片（无需本地文件，直接测试功能）
 import bg1 from '@/assets/imgs/fOGZBxWPj.jpeg'
-// import bg2 from '@/assets/imgs/24635678570797.png'
+// import bg2 from '@/assets/imgs/32614289358464.jpg'
+// import bg3 from '@/assets/imgs/fOGj90PQu.jpeg'
+
 const backgroundImages = ref([
   // 替换为你自己的网络图片 URL
-  // 'https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/5a9b98911cd647bd85146bf72aa92757.png~tplv-a9rns2rl98-image.png',
   bg1
 ])
 const currentBackgroundIndex = ref(0)
