@@ -5,6 +5,9 @@ import { useRouter } from 'vue-router'
 import { post } from '@/utils/request'
 // 导入Register组件
 import Register from '@/views/login/Register.vue'
+// 导入Home组件
+import Home from '@/views/Home.vue'
+
 
 // 路由实例
 const router = useRouter()
