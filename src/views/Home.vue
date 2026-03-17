@@ -10,32 +10,67 @@
         </div>
       </div>-->
       <nav class="home-header-nav">
-        <a href="#" class="home-nav-item">首页</a>
         <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">❤️</span> 新闻追踪
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">首页</span>
         </a>
+        <!-- 新闻追踪（带下拉） -->
+        <div class="nav-dropdown">
+          <div class="home-nav-item dropdown-trigger">
+            <span class="nav-icon">❤️</span>
+            <span class="nav-text">新闻追踪</span>
+          </div>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">国内新闻</a>
+            <a href="#" class="dropdown-item">国际新闻</a>
+            <a href="#" class="dropdown-item">新闻热点</a>
+            <a href="#" class="dropdown-item">新闻专题</a>
+          </div>
+        </div>
+        <!-- 专题研究（带下拉） -->
+        <div class="nav-dropdown">
+          <div class="home-nav-item dropdown-trigger">
+            <span class="nav-icon">🔥</span>
+            <span class="nav-text">专题研究</span>
+          </div>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">科技研究</a>
+            <a href="#" class="dropdown-item">经济金融</a>
+            <a href="#" class="dropdown-item">身心健康</a>
+            <a href="#" class="dropdown-item">学术研究</a>
+          </div>
+        </div>
+        <!-- 产品服务（带下拉） -->
+        <div class="nav-dropdown">
+          <div class="home-nav-item dropdown-trigger">
+            <span class="nav-icon">🌈</span>
+            <span class="nav-text">产品服务</span>
+          </div>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">数据平台</a>
+            <a href="#" class="dropdown-item">业务咨询</a>
+            <a href="#" class="dropdown-item">数据信息</a>
+            <a href="#" class="dropdown-item">信息中介</a>
+            <a href="#" class="dropdown-item">个人电商</a>
+            <a href="#" class="dropdown-item">个人媒体</a>
+          </div>
+        </div>
+        <!-- 个人空间（带下拉） -->
+        <div class="nav-dropdown">
+          <div class="home-nav-item dropdown-trigger">
+            <span class="nav-icon">📘</span>
+            <span class="nav-text">个人空间</span>
+          </div>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">个人简历</a>
+            <a href="#" class="dropdown-item">个人随笔</a>
+            <a href="#" class="dropdown-item">时光记录</a>
+            <a href="#" class="dropdown-item">相册</a>
+          </div>
+        </div>
         <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">🌈</span> 专题研究
+          <span class="home-nav-icon">💬</span> 读者互动
         </a>
-        <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">🌈</span> 产品服务
-        </a>
-        <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">📘</span> 个人空间
-        </a>
-        <a href="#" class="home-nav-item">读者互动
-        </a>
-<!--        <a href="#" class="home-nav-item">-->
-<!--          <span class="home-nav-icon">📷</span> 相册-->
-<!--        </a>-->
-<!--        <a href="#" class="home-nav-item">-->
-<!--          <span class="home-nav-icon">📦</span> 百宝箱-->
-<!--        </a>-->
-<!--        <a href="#" class="home-nav-item">-->
-<!--          <span class="home-nav-icon">💬</span> 留言-->
-<!--        </a>-->
-<!--        <a href="#" class="home-nav-item">联系我-->
-<!--        </a>-->
       </nav>
       <div class="header-right">
         <a href="/login" class="home-login-btn">登录</a>
