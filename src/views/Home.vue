@@ -12,25 +12,30 @@
       <nav class="home-header-nav">
         <a href="#" class="home-nav-item">首页</a>
         <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">❤️</span> 家
+          <span class="home-nav-icon">❤️</span> 新闻追踪
         </a>
         <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">🌈</span> 游记
+          <span class="home-nav-icon">🌈</span> 专题研究
         </a>
         <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">📘</span> 随笔
-        </a>
-        <a href="#" class="home-nav-item">记录</a>
-        <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">📷</span> 相册
+          <span class="home-nav-icon">🌈</span> 产品服务
         </a>
         <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">📦</span> 百宝箱
+          <span class="home-nav-icon">📘</span> 个人空间
         </a>
-        <a href="#" class="home-nav-item">
-          <span class="home-nav-icon">💬</span> 留言
+        <a href="#" class="home-nav-item">读者互动
         </a>
-        <a href="#" class="home-nav-item">联系我</a>
+<!--        <a href="#" class="home-nav-item">-->
+<!--          <span class="home-nav-icon">📷</span> 相册-->
+<!--        </a>-->
+<!--        <a href="#" class="home-nav-item">-->
+<!--          <span class="home-nav-icon">📦</span> 百宝箱-->
+<!--        </a>-->
+<!--        <a href="#" class="home-nav-item">-->
+<!--          <span class="home-nav-icon">💬</span> 留言-->
+<!--        </a>-->
+<!--        <a href="#" class="home-nav-item">联系我-->
+<!--        </a>-->
       </nav>
       <div class="header-right">
         <a href="/login" class="home-login-btn">登录</a>

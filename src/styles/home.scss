@@ -61,12 +61,13 @@ $opacity-base: 0.7;
     gap: 6px;
     transition: color 0.3s;
 
+    // 🔥 鼠标悬浮效果
     &:hover {
-      color: $primary-light-color; // hover 时仍为浅橙色
-    }
+      color: $primary-light-color; // 文字变为浅橙色
 
-    .home-nav-icon {
-      font-size: 14px;
+      .nav-icon, .nav-text {
+        color: $primary-light-color; // 图标和文字同步高亮
+      }
     }
   }
 }
