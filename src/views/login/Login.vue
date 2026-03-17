@@ -1,5 +1,5 @@
 <!--
-@descr: 用户登录页（适配小米账号样式）
+@descr: 用户登录页
 @author: Tony
 @date: 2025-12-07
 -->
@@ -28,7 +28,7 @@ const thirdPartyLoading = ref('') // 存储当前加载的第三方类型：alip
 // 表单验证
 const validateAccountForm = (): boolean => {
   if (!accountForm.value.username.trim()) {
-    alert('请输入邮箱/手机号码/小米ID')
+    alert('请输入邮箱/手机号码/北极星ID')
     return false
   }
   if (!accountForm.value.password.trim()) {
@@ -36,7 +36,7 @@ const validateAccountForm = (): boolean => {
     return false
   }
   if (!accountForm.value.agree) {
-    alert('请阅读并同意小米账号使用协议和隐私政策')
+    alert('请阅读并同意Polar账号使用协议和隐私政策')
     return false
   }
   return true
@@ -115,7 +115,7 @@ onMounted(() => {
         <input
             v-model="accountForm.username"
             type="text"
-            placeholder="邮箱/手机号码/WeChatID"
+            placeholder="邮箱/手机号码/北极星ID"
             class="form-input"
             :disabled="loading"
         />
@@ -148,9 +148,9 @@ onMounted(() => {
             id="agree"
         />
         <label for="agree">已阅读并同意</label>
-        <a href="#" class="link">小米账号使用协议</a>
+        <a href="#" class="link">Polar账号使用协议</a>
         <span>和</span>
-        <a href="#" class="link">小米账号隐私政策</a>
+        <a href="#" class="link">Polar账号隐私政策</a>
       </div>
 
       <!-- 登录按钮 -->
