@@ -124,4 +124,17 @@ onUnmounted(() => {
 <style scoped>
 /* 引入抽离的SCSS公共样式文件 */
 @import '@/styles/home.scss';
+
+/* 重置默认样式，确保全屏无间隙 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 </style>

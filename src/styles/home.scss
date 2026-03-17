@@ -1,22 +1,24 @@
 /* src/styles/home.scss */
-// 全局变量（便于统一修改）
+// 全局变量（浅黑背景）
 $primary-color: #ff6700; // 主色调（橙色）
 $text-color: #ffffff;    // 文字颜色
-$bg-color: #000000;      // 背景底色
+$bg-color: #1a1a1a;      // 浅黑色背景
 $blur-value: 8px;        // 毛玻璃模糊值
 $opacity-base: 0.7;      // 基础透明度
 
-// 全局容器
+// 全局容器 - 强制全屏
 .home-container {
-  width: 100%;
-  height: 100vh;
-  background: $bg-color;
+  width: 100vw;          // 视口宽度
+  height: 100vh;         // 视口高度
+  min-height: 100vh;     // 兼容最小高度
+  background: $bg-color; // 浅黑背景
   color: $text-color;
   font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   position: relative;
   box-sizing: border-box;
+  overflow: hidden;      // 防止滚动条
 
-  // 背景遮罩层
+  // 背景遮罩层（移除图片，仅保留浅黑背景）
   &::before {
     content: '';
     position: absolute;
@@ -24,26 +26,26 @@ $opacity-base: 0.7;      // 基础透明度
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/5a9b98911cd647bd85146bf72aa92757.png~tplv-a9rns2rl98-image.png') no-repeat center center;
-    background-size: cover;
+    background: transparent; // 移除背景图，仅用浅黑底色
     opacity: $opacity-base;
     z-index: 0;
   }
 }
 
-// 核心内容区（垂直居中）
+// 核心内容区 - 垂直居中 + 全屏适配
 .home-main-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 120px); // 扣除导航栏高度
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center;     // 垂直居中
   gap: 40px;
   box-sizing: border-box;
   padding: 20px;
+  margin: 0;
 }
 
 // 顶部导航栏
@@ -54,73 +56,77 @@ $opacity-base: 0.7;      // 基础透明度
   align-items: center;
   justify-content: space-between;
   padding: 20px 60px;
-  background: rgba($bg-color, 0.3);
+  background: rgba($bg-color, 0.8); // 浅黑半透明
   backdrop-filter: blur($blur-value);
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  // Logo样式
-  .home-logo {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+// Logo样式
+.home-logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 
-    .home-logo-ai {
-      background: $text-color;
-      color: $bg-color;
-      padding: 4px 8px;
-      border-radius: 4px 0 0 4px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .home-logo-b {
-      background: $primary-color;
-      color: $text-color;
-      padding: 4px 8px;
-      border-radius: 0 4px 4px 0;
-      font-weight: bold;
-      font-size: 14px;
-    }
+  .home-logo-ai {
+    background: $text-color;
+    color: $bg-color;
+    padding: 4px 8px;
+    border-radius: 4px 0 0 4px;
+    font-weight: bold;
+    font-size: 14px;
   }
 
-  // 导航菜单
-  .home-header-nav {
-    display: flex;
-    gap: 24px;
-
-    .home-nav-item {
-      color: $text-color;
-      text-decoration: none;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.3s;
-
-      &:hover {
-        color: lighten($primary-color, 10%);
-      }
-
-      .home-nav-icon {
-        font-size: 12px;
-      }
-    }
+  .home-logo-b {
+    background: $primary-color;
+    color: $text-color;
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+    font-weight: bold;
+    font-size: 14px;
   }
+}
 
-  // 登录按钮
-  .home-login-btn {
+// 导航菜单
+.home-header-nav {
+  display: flex;
+  gap: 24px;
+
+  .home-nav-item {
     color: $text-color;
     text-decoration: none;
     font-size: 16px;
-    padding: 6px 14px;
-    border: 1px solid rgba($text-color, 0.4);
-    border-radius: 20px;
-    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.3s;
 
+    // 替换废弃的 lighten() 为 color.adjust()
     &:hover {
-      background: rgba($text-color, 0.1);
-      color: lighten($primary-color, 10%);
-      border-color: lighten($primary-color, 10%);
+      color: color.adjust($primary-color, $lightness: 10%);
     }
+
+    .home-nav-icon {
+      font-size: 12px;
+    }
+  }
+}
+
+// 登录按钮
+.home-login-btn {
+  color: $text-color;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 6px 14px;
+  border: 1px solid rgba($text-color, 0.4);
+  border-radius: 20px;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba($text-color, 0.1);
+    // 替换废弃的 lighten() 为 color.adjust()
+    color: color.adjust($primary-color, $lightness: 10%);
+    border-color: color.adjust($primary-color, $lightness: 10%);
   }
 }
 
@@ -219,10 +225,14 @@ $opacity-base: 0.7;      // 基础透明度
 
 // 底部备案
 .home-footer {
-  position: relative;
+  position: fixed;       // 固定到底部
+  bottom: 0;
+  left: 0;
+  width: 100%;
   z-index: 5;
   text-align: center;
   padding: 20px;
   font-size: 14px;
   opacity: $opacity-base;
+  background: rgba($bg-color, 0.5); // 浅黑背景
 }
