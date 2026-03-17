@@ -8,6 +8,7 @@
           <span class="nav-icon">🏠</span>
           <span class="nav-text">首页</span>
         </a>
+
         <!-- 新闻追踪（带下拉） -->
         <div class="nav-dropdown">
           <div class="home-nav-item dropdown-trigger">
@@ -21,6 +22,7 @@
             <a href="#" class="dropdown-item">新闻专题</a>
           </div>
         </div>
+
         <!-- 专题研究（带下拉） -->
         <div class="nav-dropdown">
           <div class="home-nav-item dropdown-trigger">
@@ -34,6 +36,7 @@
             <a href="#" class="dropdown-item">学术研究</a>
           </div>
         </div>
+
         <!-- 产品服务（带下拉） -->
         <div class="nav-dropdown">
           <div class="home-nav-item dropdown-trigger">
