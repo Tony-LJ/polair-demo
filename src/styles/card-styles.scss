@@ -1,0 +1,331 @@
+// src/styles/card-styles.scss (推荐使用scss，也可改为.css)
+// 登录/注册卡片公共样式
+$primary-color: #ff6700; // 北极星主色（小米橙）
+$light-primary: #ffb88c; // 浅橙色（禁用态）
+$hover-primary: #ff9a5a; // 悬停橙色
+$bg-gray: #f9f9f9;       // 输入框背景灰
+$text-gray: #999;        // 文本浅灰
+$border-gray: #f0f0f0;   // 边框灰
+
+// 卡片容器
+.login-register-card {
+  width: 100%;
+  max-width: 450px;
+  background: #ffffff;
+  padding: 40px 32px;
+  border-radius: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+
+  // 响应式适配
+  @media (max-width: 480px) {
+    padding: 32px 24px;
+    max-width: 100%;
+  }
+}
+
+// Tab切换栏（仅登录页使用）
+.tab-bar {
+  display: flex;
+  margin-bottom: 32px;
+
+  .tab-item {
+    font-size: 24px;
+    font-weight: 500;
+    color: $text-gray;
+    margin-right: 32px;
+    padding-bottom: 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &.active {
+      color: #333;
+      border-bottom: 2px solid $primary-color;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 20px;
+    }
+  }
+}
+
+// 表单项通用样式
+.form-item {
+  margin-bottom: 16px;
+
+  // 标签样式
+  .label {
+    font-size: 14px;
+    color: $text-gray;
+    margin-bottom: 4px;
+    padding-left: 4px;
+    display: block;
+  }
+
+  // 下拉选择容器
+  .select-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+    padding: 12px 16px;
+    background-color: $bg-gray;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    .arrow-icon {
+      font-size: 12px;
+      color: $text-gray;
+    }
+  }
+}
+
+// 输入框通用样式
+.form-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid $border-gray;
+  border-radius: 4px;
+  background-color: $bg-gray;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $text-gray;
+  }
+
+  &:focus {
+    border-color: $primary-color;
+  }
+}
+
+// 手机号+国家码行
+.phone-row {
+  display: flex;
+  gap: 8px;
+
+  .country-code-wrapper {
+    width: 35%;
+
+    .select-wrapper {
+      padding: 12px 8px;
+    }
+  }
+
+  .phone-input-wrapper {
+    flex: 1;
+
+    .form-input {
+      height: 44px;
+      border: none;
+    }
+  }
+}
+
+// 验证码行
+.code-row {
+  display: flex;
+  align-items: center;
+  background-color: $bg-gray;
+  border-radius: 4px;
+  padding: 0;
+
+  .code-input {
+    flex: 1;
+    height: 44px;
+    padding: 0 16px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    background: transparent;
+
+    &::placeholder {
+      color: $text-gray;
+    }
+  }
+
+  .get-code-btn {
+    width: auto;
+    height: 44px;
+    padding: 0 16px;
+    background-color: transparent;
+    color: $primary-color;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $hover-primary;
+    }
+
+    &:disabled {
+      color: $light-primary;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// 协议勾选
+.agree-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #666;
+
+  input {
+    margin-right: 8px;
+    transform: scale(1.2);
+  }
+
+  .link {
+    color: $primary-color;
+    text-decoration: none;
+    margin: 0 4px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// 操作按钮（登录/注册）
+.action-btn {
+  width: 100%;
+  height: 48px;
+  background-color: $light-primary;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 24px;
+
+  &:hover {
+    background-color: $hover-primary;
+  }
+
+  &:disabled {
+    background-color: #ffd2b3;
+    cursor: not-allowed;
+  }
+}
+
+// 辅助链接组
+.link-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  font-size: 14px;
+
+  .link {
+    color: $primary-color;
+    text-decoration: none;
+  }
+}
+
+// 分割线
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+  color: $text-gray;
+  font-size: 14px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #eee;
+  }
+
+  span {
+    padding: 0 16px;
+  }
+}
+
+// 第三方登录
+.third-party-login {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+
+  .third-party-btn {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &.alipay {
+      background-color: #1677ff;
+    }
+
+    &.wechat {
+      background-color: #07c160;
+    }
+
+    &.qq {
+      background-color: #12b7f5;
+    }
+
+    &.weibo {
+      background-color: #e6162d;
+    }
+
+    @media (max-width: 480px) {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+  }
+}
+
+// 密码切换按钮
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  cursor: pointer;
+  color: $text-gray;
+  user-select: none;
+}
+
+// 辅助链接（收不到验证码）
+.helper-link {
+  text-align: left;
+
+  .code-help {
+    font-size: 14px;
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
