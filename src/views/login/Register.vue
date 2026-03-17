@@ -203,7 +203,7 @@ onUnmounted(() => {
 
 <style scoped>
 /* 引入公共样式 */
-@import '@/styles/card-styles.scss';
+@import '@/styles/login-card-styles.scss';
 
 /* 仅保留注册表单独有样式 */
 .register-form {

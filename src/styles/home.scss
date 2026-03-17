@@ -1,0 +1,228 @@
+/* src/styles/home.scss */
+// 全局变量（便于统一修改）
+$primary-color: #ff6700; // 主色调（橙色）
+$text-color: #ffffff;    // 文字颜色
+$bg-color: #000000;      // 背景底色
+$blur-value: 8px;        // 毛玻璃模糊值
+$opacity-base: 0.7;      // 基础透明度
+
+// 全局容器
+.home-container {
+  width: 100%;
+  height: 100vh;
+  background: $bg-color;
+  color: $text-color;
+  font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  position: relative;
+  box-sizing: border-box;
+
+  // 背景遮罩层
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/5a9b98911cd647bd85146bf72aa92757.png~tplv-a9rns2rl98-image.png') no-repeat center center;
+    background-size: cover;
+    opacity: $opacity-base;
+    z-index: 0;
+  }
+}
+
+// 核心内容区（垂直居中）
+.home-main-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+// 顶部导航栏
+.home-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba($bg-color, 0.3);
+  backdrop-filter: blur($blur-value);
+
+  // Logo样式
+  .home-logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .home-logo-ai {
+      background: $text-color;
+      color: $bg-color;
+      padding: 4px 8px;
+      border-radius: 4px 0 0 4px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .home-logo-b {
+      background: $primary-color;
+      color: $text-color;
+      padding: 4px 8px;
+      border-radius: 0 4px 4px 0;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+
+  // 导航菜单
+  .home-header-nav {
+    display: flex;
+    gap: 24px;
+
+    .home-nav-item {
+      color: $text-color;
+      text-decoration: none;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.3s;
+
+      &:hover {
+        color: lighten($primary-color, 10%);
+      }
+
+      .home-nav-icon {
+        font-size: 12px;
+      }
+    }
+  }
+
+  // 登录按钮
+  .home-login-btn {
+    color: $text-color;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 6px 14px;
+    border: 1px solid rgba($text-color, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+
+    &:hover {
+      background: rgba($text-color, 0.1);
+      color: lighten($primary-color, 10%);
+      border-color: lighten($primary-color, 10%);
+    }
+  }
+}
+
+// 时钟区域
+.home-clock-section {
+  text-align: center;
+
+  .home-time {
+    font-size: 96px;
+    font-weight: 300;
+    margin: 0;
+    letter-spacing: 4px;
+  }
+
+  .home-date-info {
+    margin-top: 10px;
+    font-size: 18px;
+    opacity: 0.9;
+    display: flex;
+    gap: 15px;
+  }
+}
+
+// 搜索框
+.home-search-box {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  background: rgba($text-color, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  padding: 12px 24px;
+  border: 1px solid rgba($text-color, 0.2);
+
+  .home-search-paw {
+    font-size: 20px;
+    margin-right: 12px;
+  }
+
+  .home-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: $text-color;
+    font-size: 18px;
+    padding: 8px 0;
+
+    &::placeholder {
+      color: rgba($text-color, 0.6);
+    }
+  }
+
+  .home-search-btn {
+    background: transparent;
+    border: none;
+    color: $text-color;
+    font-size: 18px;
+    cursor: pointer;
+  }
+}
+
+// 快捷功能区
+.home-shortcut-grid {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+
+  .home-shortcut-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $text-color;
+    text-decoration: none;
+    gap: 8px;
+
+    .home-shortcut-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba($text-color, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      backdrop-filter: blur(5px);
+    }
+
+    .home-shortcut-label {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+  }
+}
+
+// 底部备案
+.home-footer {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  opacity: $opacity-base;
+}

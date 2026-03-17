@@ -49,12 +49,17 @@ const handleLogin = async () => {
 
   loginLoading.value = true
   try {
-    const res = await post<{ token: string }>('/api/login/account', {
-      username: loginForm.value.username,
-      password: loginForm.value.password
-    })
-
+    // const res = await post<{ token: string }>('/api/login/account', {
+    //   username: loginForm.value.username,
+    //   password: loginForm.value.password
+    // })
+    // 模拟登录成功 - 生成测试token
+    const res = { token: 'test_token_' + Date.now() }
+    // 存储token到本地
     localStorage.setItem('token', res.token)
+    // 可选：记住用户名
+    localStorage.setItem('savedUsername', loginForm.value.username)
+
     router.push('/home')
   } catch (error) {
     console.error('登录失败：', error)
@@ -185,7 +190,7 @@ onMounted(() => {
 
 <style scoped>
 /* 引入公共样式（如果是css文件，改为@import '@/styles/card-styles.css';） */
-@import '@/styles/card-styles.scss';
+@import '@/styles/login-card-styles.scss';
 
 /* 仅保留页面独有样式（背景+容器） */
 .login-container {
