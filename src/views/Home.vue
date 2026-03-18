@@ -16,9 +16,10 @@
             <span class="nav-text">新闻追踪</span>
           </div>
           <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">国内新闻</a>
+            <!-- 🔥 修改国内新闻链接为路由跳转 -->
+            <router-link to="/news/china" class="dropdown-item">国内新闻</router-link>
             <a href="#" class="dropdown-item">国际新闻</a>
-            <!-- 科技研究（去掉箭头 →） -->
+            <!-- 其他下拉项不变 -->
             <div class="nav-dropdown dropdown-item-with-sub">
               <a href="#" class="dropdown-item">新闻热点</a>
               <div class="dropdown-submenu">
@@ -143,6 +144,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+// import ChinaNews from '@/views/news/ChinaNews.vue' //若仅做跳转，此导入非必须，路由已配置即可
 // 🔥 改用网络图片（无需本地文件，直接测试功能）
 import bg1 from '@/assets/imgs/fOGZBxWPj.jpeg'
 // import bg2 from '@/assets/imgs/32614289358464.jpg'

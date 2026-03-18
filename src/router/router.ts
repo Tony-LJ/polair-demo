@@ -7,6 +7,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Login from '@/views/login/Login.vue'
 import Register from '@/views/login/Register.vue'
 import Home from '@/views/Home.vue'
+import ChinaNews from '@/views/news/ChinaNews.vue' // 导入国内新闻页面
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -30,6 +31,13 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             requiresAuth: true // 需要登录才能访问
         }
+    }
+    ,
+    // 🔥 新增国内新闻路由
+    {
+        path: '/news/china', // 自定义路由路径
+        name: 'ChinaNews',   // 路由名称（需唯一）
+        component: ChinaNews
     }
 ]
 
