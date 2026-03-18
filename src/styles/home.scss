@@ -47,8 +47,8 @@ $opacity-base: 0.7;
   // 🔥 核心修改：改为 space-between，让左右元素两端对齐
   justify-content: space-between;
 
-  padding: 20px 60px;
-  background: rgba($bg-color, 0.9);
+  padding: 12px 60px;
+  background: rgba($bg-color, 0.2);
   backdrop-filter: blur($blur-value);
   width: 100%;
   box-sizing: border-box;
@@ -84,7 +84,6 @@ $opacity-base: 0.7;
   }
 
   // 🔥 下拉容器 - 外框缩小 + 自适应文字宽度
-
   // 🔥 一级下拉容器（二级菜单）
   .nav-dropdown {
     position: relative;
@@ -152,14 +151,14 @@ $opacity-base: 0.7;
     }
   }
 
-  // 🔥 带三级菜单的二级项容器
+  // 🔥 带三级菜单的二级项容器（保持不变）
   .dropdown-item-with-sub {
     position: relative;
     display: block;
     padding: 0;
   }
 
-  // 🔥 三级菜单容器
+  // 🔥 缩小后的三级菜单容器
   .dropdown-submenu {
     display: block;
     opacity: 0;
@@ -168,12 +167,13 @@ $opacity-base: 0.7;
     top: 0;
     left: 100%;
     margin-left: 8px;
-    min-width: 180px;
-    padding: 10px;
+    min-width: 140px;   // 核心：缩小最小宽度
+    max-width: 160px;   // 限制最大宽度，避免过宽
+    padding: 6px;       // 缩小内边距
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;// 圆角同步缩小
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     z-index: 300;
     transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
     transform: translateX(-5px);
@@ -185,18 +185,18 @@ $opacity-base: 0.7;
     transform: translateX(0);
   }
 
-  // 🔥 三级菜单项
+  // 🔥 缩小后的三级菜单项
   .dropdown-subitem {
     display: block;
-    padding: 12px 18px;
-    margin: 6px 0;
+    padding: 8px 12px;  // 核心：缩小项的上下/左右内边距
+    margin: 4px 0;      // 缩小项之间的间距
     background: rgba(255, 255, 255, 0.6);
     color: #333333;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 15px;    // 核心：缩小字号
     font-weight: 500;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 8px; // 圆角同步缩小
     transition: all 0.2s ease;
     white-space: nowrap;
 
@@ -204,7 +204,7 @@ $opacity-base: 0.7;
       background: rgba(255, 255, 255, 0.95);
       color: $primary-color;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); // 阴影同步缩小
     }
   }
 }

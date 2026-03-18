@@ -12,30 +12,27 @@
         <!-- 新闻追踪（带下拉） -->
         <div class="nav-dropdown">
           <div class="home-nav-item dropdown-trigger">
-            <span class="nav-icon">❤️</span>
+            <span class="nav-icon">🔥</span>
             <span class="nav-text">新闻追踪</span>
           </div>
           <div class="dropdown-menu">
             <a href="#" class="dropdown-item">国内新闻</a>
             <a href="#" class="dropdown-item">国际新闻</a>
-            <a href="#" class="dropdown-item">新闻热点</a>
-            <a href="#" class="dropdown-item">新闻专题</a>
+            <!-- 科技研究（去掉箭头 →） -->
+            <div class="nav-dropdown dropdown-item-with-sub">
+              <a href="#" class="dropdown-item">新闻热点</a>
+              <div class="dropdown-submenu">
+                <a href="#" class="dropdown-subitem">数据处理</a>
+              </div>
+            </div>
+            <div class="nav-dropdown dropdown-item-with-sub">
+              <a href="#" class="dropdown-item">新闻专题</a>
+              <div class="dropdown-submenu">
+                <a href="#" class="dropdown-subitem">美伊战争</a>
+              </div>
+            </div>
           </div>
         </div>
-
-        <!-- 专题研究（带下拉） -->
-<!--        <div class="nav-dropdown">
-          <div class="home-nav-item dropdown-trigger">
-            <span class="nav-icon">🔥</span>
-            <span class="nav-text">专题研究</span>
-          </div>
-          <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">科技研究</a>
-            <a href="#" class="dropdown-item">经济金融</a>
-            <a href="#" class="dropdown-item">身心健康</a>
-            <a href="#" class="dropdown-item">学术研究</a>
-          </div>
-        </div>-->
         <!-- 专题研究（带下拉） -->
         <div class="nav-dropdown">
           <div class="home-nav-item dropdown-trigger">
@@ -47,10 +44,11 @@
             <div class="nav-dropdown dropdown-item-with-sub">
               <a href="#" class="dropdown-item">科技研究</a> <!-- 这里去掉了 → -->
               <div class="dropdown-submenu">
-                <a href="#" class="dropdown-subitem">人工智能</a>
-                <a href="#" class="dropdown-subitem">大数据</a>
-                <a href="#" class="dropdown-subitem">云计算</a>
-                <a href="#" class="dropdown-subitem">区块链</a>
+                <a href="#" class="dropdown-subitem">数据处理</a>
+                <a href="#" class="dropdown-subitem">数据智能</a>
+                <a href="#" class="dropdown-subitem">后端开发</a>
+                <a href="#" class="dropdown-subitem">前端开发</a>
+                <a href="#" class="dropdown-subitem">运维监控</a>
               </div>
             </div>
             <a href="#" class="dropdown-item">经济金融</a>

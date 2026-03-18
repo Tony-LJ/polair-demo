@@ -32,7 +32,7 @@ import bg1 from '@/assets/imgs/fOGZBxWPj.jpeg'
 const backgroundImages = ref([
   // 替换为你自己的网络图片 URL
   // 'https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/5a9b98911cd647bd85146bf72aa92757.png~tplv-a9rns2rl98-image.png',
-  bg1
+  // bg1
 ])
 // 当前背景图索引
 const currentBgIndex = ref(0)
@@ -103,10 +103,10 @@ onMounted(() => {
   <div class="login-container">
     <!-- 宇宙星际背景 -->
     <!-- 🔥 替换原有背景：添加自适应背景图容器 -->
-    <div
-        class="login-bg"
-        :style="{ backgroundImage: `url(${currentBgImage})` }"
-    ></div>
+<!--    <div-->
+<!--        class="login-bg"-->
+<!--        :style="{ backgroundImage: `url(${currentBgImage})` }"-->
+<!--    ></div>-->
 
     <!-- 登录/注册卡片（使用公共样式类） -->
     <div class="login-register-card">
