@@ -51,9 +51,31 @@
                 <a href="#" class="dropdown-subitem">运维监控</a>
               </div>
             </div>
-            <a href="#" class="dropdown-item">经济金融</a>
-            <a href="#" class="dropdown-item">身心健康</a>
-            <a href="#" class="dropdown-item">学术研究</a>
+            <div class="nav-dropdown dropdown-item-with-sub">
+              <a href="#" class="dropdown-item">经济金融</a> <!-- 这里去掉了 → -->
+              <div class="dropdown-submenu">
+                <a href="#" class="dropdown-subitem">宏观经济</a>
+                <a href="#" class="dropdown-subitem">金融分析</a>
+                <a href="#" class="dropdown-subitem">财务分析</a>
+                <a href="#" class="dropdown-subitem">税收政策</a>
+              </div>
+            </div>
+            <div class="nav-dropdown dropdown-item-with-sub">
+              <a href="#" class="dropdown-item">身心健康</a> <!-- 这里去掉了 → -->
+              <div class="dropdown-submenu">
+                <a href="#" class="dropdown-subitem">疾病预防</a>
+                <a href="#" class="dropdown-subitem">疾病治疗</a>
+                <a href="#" class="dropdown-subitem">心理健康</a>
+              </div>
+            </div>
+            <div class="nav-dropdown dropdown-item-with-sub">
+              <a href="#" class="dropdown-item">学术研究</a> <!-- 这里去掉了 → -->
+              <div class="dropdown-submenu">
+                <a href="#" class="dropdown-subitem">数学研究</a>
+                <a href="#" class="dropdown-subitem">物理研究</a>
+              </div>
+            </div>
+<!--            <a href="#" class="dropdown-item">学术研究</a>-->
           </div>
         </div>
 

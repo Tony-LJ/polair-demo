@@ -98,11 +98,13 @@ $opacity-base: 0.7;
       left: 50%;
       transform: translateX(-50%) translateY(-5px);
       width: fit-content;
-      min-width: 160px;
-      padding: 10px;
+      min-width: 140px;  // 原可能是 160px/180px，改为 140px
+      max-width: 160px;  // 限制最大宽度，避免过宽
+      // 🔥 核心2：缩小容器内边距
+      padding: 6px;       // 原 10px，改为 6px，让整体更紧凑
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
-      border-radius: 12px;
+      border-radius: 10px; // 圆角同步缩小
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
       z-index: 200;
       transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
@@ -117,7 +119,7 @@ $opacity-base: 0.7;
         height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
-        border-bottom: 8px solid rgba(255, 255, 255, 0.85);
+        border-bottom: 8px solid rgba(255, 255, 255, 0.75);
       }
     }
 
@@ -131,15 +133,16 @@ $opacity-base: 0.7;
   // 🔥 二级菜单项
   .dropdown-item {
     display: block;
-    padding: 12px 18px;
-    margin: 6px 0;
+    // 🔥 核心：缩小项的上下/左右内边距，降低高度
+    padding: 8px 12px;  // 原 12px 18px，改为 8px 12px
+    margin: 4px 0;       // 原 6px，改为 4px，缩小项间距
     background: rgba(255, 255, 255, 0.6);
     color: #333333;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 15px;     // 原 17px，改为 15px，缩小字号
     font-weight: 500;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 8px;  // 圆角同步缩小
     transition: all 0.2s ease;
     white-space: nowrap;
 
@@ -167,12 +170,12 @@ $opacity-base: 0.7;
     top: 0;
     left: 100%;
     margin-left: 8px;
-    min-width: 140px;   // 核心：缩小最小宽度
-    max-width: 160px;   // 限制最大宽度，避免过宽
-    padding: 6px;       // 缩小内边距
+    min-width: 120px; // 比二级菜单更窄
+    max-width: 140px;
+    padding: 4px;       // 缩小内边距
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
-    border-radius: 10px;// 圆角同步缩小
+    border-radius: 8px;// 圆角同步缩小
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     z-index: 300;
     transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
