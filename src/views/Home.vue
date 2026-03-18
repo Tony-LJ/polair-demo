@@ -18,7 +18,7 @@
           <div class="dropdown-menu">
             <!-- 🔥 修改国内新闻链接为路由跳转 -->
             <router-link to="/news/china" class="dropdown-item">国内新闻</router-link>
-            <a href="#" class="dropdown-item">国际新闻</a>
+            <router-link to="/news/international" class="dropdown-item">国际新闻</router-link>
             <!-- 其他下拉项不变 -->
             <div class="nav-dropdown dropdown-item-with-sub">
               <a href="#" class="dropdown-item">新闻热点</a>
