@@ -4,7 +4,7 @@
     <!-- 顶部蓝色头部区域（铺满宽度） -->
     <header class="news-header">
       <!-- 返回首页按钮 -->
-      <router-link to="/" class="back-home-btn">
+      <router-link to="/home" class="back-home-btn">
         <span class="back-icon">←</span>
         <span class="back-text">返回首页</span>
       </router-link>
