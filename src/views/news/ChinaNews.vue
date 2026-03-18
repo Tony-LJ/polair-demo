@@ -6,13 +6,17 @@
   <div class="china-news-container">
     <!-- 顶部蓝色头部区域 -->
     <header class="news-header">
-      <div class="header-top">
-        <span class="site-title">iBaoTu新闻资讯</span>
+      <!-- 新增内部容器，让内容居中 -->
+      <div class="header-inner">
+        <div class="header-top">
+          <span class="site-title">iBaoTu新闻资讯</span>
+        </div>
+        <div class="header-date">2025年03月18日</div>
+        <h1 class="news-title">今日资讯早报</h1>
+        <p class="news-subtitle">TODAY MORNING POST</p>
+        <p class="news-desc">每日为你摘取最重要的商业新闻</p>
       </div>
-      <div class="header-date">2025年03月18日</div>
-      <h1 class="news-title">今日资讯早报</h1>
-      <p class="news-subtitle">TODAY MORNING POST</p>
-      <p class="news-desc">每日为你摘取最重要的商业新闻</p>
+      <!-- 插画保留在外部，不受内部容器限制 -->
       <div class="header-illustration">
         <div class="phone-hand">
           <div class="phone">
@@ -72,8 +76,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 可继续添加更多新闻项 -->
     </main>
   </div>
 </template>
@@ -91,13 +93,21 @@
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
-/* 顶部蓝色头部 */
+/* 顶部蓝色头部 - 覆盖整个页面宽度 */
 .news-header {
   background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
   color: white;
-  padding: 20px 24px 40px;
+  padding: 20px 0 40px;
+  width: 100%;
   position: relative;
   overflow: hidden;
+
+  /* 内部内容容器，保证居中且有留白 */
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
   .header-top {
     text-align: center;
@@ -137,10 +147,10 @@
     font-size: 16px;
   }
 
-  /* 右侧手机插画（简化版） */
+  /* 右侧手机插画 */
   .header-illustration {
     position: absolute;
-    right: 20px;
+    right: 50px;
     bottom: 0;
     width: 200px;
     height: 200px;
