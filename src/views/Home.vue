@@ -23,7 +23,7 @@
             <div class="nav-dropdown dropdown-item-with-sub">
               <a href="#" class="dropdown-item">新闻热点</a>
               <div class="dropdown-submenu">
-                <a href="#" class="dropdown-subitem">数据处理</a>
+                <a href="#" class="dropdown-subitem">国内外热点</a>
               </div>
             </div>
             <div class="nav-dropdown dropdown-item-with-sub">
